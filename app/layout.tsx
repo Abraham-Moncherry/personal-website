@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavigationMenuDemo } from "@/components/navigation-bar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
+import { SocialsFoooter } from "@/components/socials-footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +37,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex p-3 justify-between">
-            <NavigationMenuDemo />
-            <ModeToggle />
+          <div className="flex flex-col min-h-screen">
+            <div className="flex p-3 justify-between">
+              <NavigationMenuDemo />
+              <ModeToggle />
+            </div>
+            <div className="flex-1">{children}</div>
+            <SocialsFoooter />
           </div>
-          {children}
         </ThemeProvider>
       </body>
     </html>

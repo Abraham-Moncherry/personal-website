@@ -15,19 +15,16 @@ export function NavigationMenuDemo() {
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/docs">Home</Link>
+          <Link href="/">Home</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/docs">About</Link>
+          <Link href="/About">About</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/docs">Blogs</Link>
+          <Link href="/Blogs">Blogs</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/docs">Projects</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/docs">Contact</Link>
+          <Link href="/Projects">Projects</Link>
         </NavigationMenuLink>
       </NavigationMenuList>
     </NavigationMenu>
