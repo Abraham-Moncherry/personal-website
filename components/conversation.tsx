@@ -19,7 +19,8 @@ export function Conversation() {
       // Start the conversation with your agent
       await conversation.startSession({
         agentId: "agent_4101k4a84me1fd7v14pn2j0aprx7",
-        user_id: "YOUR_CUSTOMER_USER_ID",
+        userId: "YOUR_CUSTOMER_USER_ID",
+        connectionType: "webrtc",
       });
     } catch (error) {
       console.error("Failed to start conversation:", error);
