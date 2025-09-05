@@ -21,9 +21,6 @@ export function NavigationMenuDemo() {
           <Link href="/About">About</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/Blogs">Blogs</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
           <Link href="/Projects">Projects</Link>
         </NavigationMenuLink>
       </NavigationMenuList>

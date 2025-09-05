@@ -37,16 +37,16 @@ export function Conversation() {
         <button
           onClick={startConversation}
           disabled={conversation.status === "connected"}
-          className="px-4 py-2 bg-blue-400 text-white rounded disabled:bg-gray-300"
+          className="px-4 py-2 bg-purple-300 border-2 hover:border-orange-400 hover:bg-purple-400 text-white rounded-2xl disabled:bg-gray-300"
         >
-          Start Conversation
+          Start
         </button>
         <button
           onClick={stopConversation}
           disabled={conversation.status !== "connected"}
-          className="px-4 py-2 bg-red-400 text-white rounded disabled:bg-gray-300"
+          className="px-4 py-2 bg-red-400 border-2 hover:border-orange-400 hover:bg-red-500 text-white rounded-2xl disabled:bg-gray-300"
         >
-          Stop Conversation
+          Stop
         </button>
       </div>
     </div>
