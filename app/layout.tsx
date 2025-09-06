@@ -43,8 +43,10 @@ export default function RootLayout({
               <NavigationMenuDemo />
               <ModeToggle />
             </div>
-            <div className="flex-1">{children}</div>
-            <SocialsFoooter />
+            <div className="flex-1 py-2">{children}</div>
+            <div className="py-0.5">
+              <SocialsFoooter />
+            </div>
           </div>
         </ThemeProvider>
       </body>

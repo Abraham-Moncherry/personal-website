@@ -185,10 +185,19 @@ export default function Orb({
 
     // Dynamic import of OGL
     import("ogl").then(({ Renderer, Program, Mesh, Triangle, Vec3 }) => {
+      // Clear any existing canvases first
+      const existingCanvas = container.querySelector("canvas");
+      if (existingCanvas) {
+        container.removeChild(existingCanvas);
+      }
+
       const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
       const gl = renderer.gl;
       gl.clearColor(0, 0, 0, 0);
       container.appendChild(gl.canvas);
+
+      // Make canvas non-interactive so UI elements can receive touch events
+      gl.canvas.style.pointerEvents = "none";
 
       const geometry = new Triangle(gl);
       const program = new Program(gl, {
@@ -300,7 +309,8 @@ export default function Orb({
   return (
     <div
       ref={ctnDom}
-      className="w-full h-full scale-[2] md:scale-[1.2] origin-center"
+      className="w-full h-full scale-[1.2] md:scale-[1.6] origin-center"
+      style={{ position: "relative", pointerEvents: "none" }}
     >
       <div
         style={{
@@ -311,6 +321,7 @@ export default function Orb({
           zIndex: 10,
           width: "80%",
           maxWidth: "800px",
+          pointerEvents: "auto",
         }}
       >
         {children}
