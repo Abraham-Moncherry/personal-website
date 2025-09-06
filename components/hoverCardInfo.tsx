@@ -1,4 +1,6 @@
-import { CalendarIcon } from "lucide-react";
+"use client";
+
+import { useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -9,10 +11,16 @@ import {
 } from "@/components/ui/hover-card";
 
 export function HoverCardInfo() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <HoverCard>
+    <HoverCard open={isOpen} onOpenChange={setIsOpen}>
       <HoverCardTrigger asChild>
-        <Button variant="link">
+        <Button
+          variant="link"
+          className="px-1 font-bold hover:underline focus-visible:ring-2 focus-visible:ring-offset-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <b>Abraham Moncherry</b>
         </Button>
       </HoverCardTrigger>

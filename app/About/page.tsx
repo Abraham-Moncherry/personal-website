@@ -4,9 +4,9 @@ import TechStackCarousel from "@/components/TechStackCarousel";
 export default async function Page() {
   return (
     <div className="flex flex-col min-h-[80vh]">
-      <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-8 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold mb-12">About Me</h1>
-        <div className="max-w-2xl text-center space-y-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-4 md:py-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">About Me</h1>
+        <div className="max-w-2xl text-center space-y-6">
           <section className="space-y-4">
             <p className="text-base md:text-lg leading-relaxed">
               Welcome! Hopefully, you've already had a chat with Selina, my
@@ -27,13 +27,13 @@ export default async function Page() {
             </p>
           </section>
 
-          <div className="text-sm md:text-base text-gray-400 mt-8">
+          <div className="text-sm md:text-base text-gray-400 mt-4">
             Feel free to reach out through my socials or email down below.
           </div>
         </div>
       </div>
 
-      <div className="mt-auto pb-8">
+      <div className="mt-4 pb-4">
         <TechStackCarousel animationDuration={25} />
       </div>
     </div>
