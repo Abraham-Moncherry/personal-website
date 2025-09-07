@@ -1,8 +1,23 @@
 import React from "react";
+import { useTheme } from "next-themes";
+
+const VercelLogo = ({ size = 48, className = "" }: { size?: number; className?: string }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 76 65"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+  </svg>
+);
 
 interface TechItem {
   name: string;
   icon: string;
+  darkIcon?: string;
   alt: string;
 }
 
@@ -59,7 +74,7 @@ const techStack: TechItem[] = [
   },
   {
     name: "Vercel",
-    icon: " https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
     alt: "Vercel",
   },
   {
@@ -91,13 +106,14 @@ interface TechStackCarouselProps {
 const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
   animationDuration = 30,
 }) => {
+  const { theme } = useTheme();
+
   return (
-    <div className="relative w-full flex flex-col items-center gap-12">
-      <div className="relative w-full h-30 overflow-hidden before:absolute before:top-0 before:left-0 before:w-16 before:h-full before:z-10 before:pointer-events-none after:absolute after:top-0 after:right-0 after:w-16 after:h-full after:z-10 after:pointer-events-none ">
+    <div className="w-full overflow-hidden">
+      <div className="relative flex overflow-hidden py-4">
         <div
-          className="flex h-full animate-scroll"
+          className="flex animate-scroll"
           style={{
-            width: "calc(200% + 2.5rem)",
             animationDuration: `${animationDuration}s`,
           }}
         >
@@ -105,13 +121,17 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
           {techStack.map((tech, index) => (
             <div
               key={`first-${index}`}
-              className="flex-none h-20 w-20 mx-5 my-5 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl overflow-hidden"
+              className="flex-shrink-0 w-14 h-14 md:w-20 md:h-20 mx-2 md:mx-4 flex items-center justify-center"
             >
-              <img
-                src={tech.icon}
-                alt={tech.alt}
-                className="w-12 h-12 object-contain drop-shadow-sm"
-              />
+              {tech.name === "Vercel" ? (
+                <VercelLogo size={40} className="md:w-12 md:h-12 text-black dark:text-white" />
+              ) : (
+                <img
+                  src={tech.icon}
+                  alt={tech.alt}
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                />
+              )}
             </div>
           ))}
 
@@ -119,13 +139,17 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
           {techStack.map((tech, index) => (
             <div
               key={`second-${index}`}
-              className="flex-none h-20 w-20 mx-5 my-5 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:shadow-xl overflow-hidden"
+              className="flex-shrink-0 w-14 h-14 md:w-20 md:h-20 mx-2 md:mx-4 flex items-center justify-center"
             >
-              <img
-                src={tech.icon}
-                alt={tech.alt}
-                className="w-12 h-12 object-contain drop-shadow-sm"
-              />
+              {tech.name === "Vercel" ? (
+                <VercelLogo size={40} className="md:w-12 md:h-12 text-black dark:text-white" />
+              ) : (
+                <img
+                  src={tech.icon}
+                  alt={tech.alt}
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                />
+              )}
             </div>
           ))}
         </div>

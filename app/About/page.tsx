@@ -1,7 +1,30 @@
+"use client";
+
 import { HoverCardInfo } from "@/components/hoverCardInfo";
 import TechStackCarousel from "@/components/TechStackCarousel";
+import { useEffect, useState } from "react";
 
-export default async function Page() {
+export default function Page() {
+  const [animationDuration, setAnimationDuration] = useState(25);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setAnimationDuration(10); // Faster on mobile
+      } else {
+        setAnimationDuration(25); // Default for desktop/tablet
+      }
+    };
+    handleResize(); // Set on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Debug: log the animationDuration to verify it updates
+  useEffect(() => {
+    console.log("animationDuration:", animationDuration);
+  }, [animationDuration]);
+
   return (
     <div className="flex flex-col min-h-[80vh]">
       <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 py-4 md:py-8">
@@ -34,7 +57,7 @@ export default async function Page() {
       </div>
 
       <div className="mt-4 pb-4">
-        <TechStackCarousel animationDuration={25} />
+        <TechStackCarousel animationDuration={animationDuration} />
       </div>
     </div>
   );
