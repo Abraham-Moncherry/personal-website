@@ -310,7 +310,7 @@ export default function Orb({
     <div
       ref={ctnDom}
       className="w-full h-full scale-[1.2] md:scale-[1.6] origin-center"
-      style={{ position: "relative", pointerEvents: "none" }}
+      style={{ position: "relative" }}
     >
       <div
         style={{
@@ -321,7 +321,6 @@ export default function Orb({
           zIndex: 10,
           width: "80%",
           maxWidth: "800px",
-          pointerEvents: "auto",
         }}
       >
         {children}
