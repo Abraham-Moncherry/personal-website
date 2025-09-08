@@ -9,6 +9,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { Spinner } from "@/components/ui/spinner";
 
 export function HoverCardInfo() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,9 @@ export function HoverCardInfo() {
         <div className="flex justify-between gap-6">
           <Avatar className="h-24 w-24">
             <AvatarImage src="/Abraham.jpeg" alt="Abraham" />
-            <AvatarFallback>VC</AvatarFallback>
+            <AvatarFallback>
+              <Spinner />
+            </AvatarFallback>
           </Avatar>
           <div className="space-y-1">
             <h4 className="text-sm font-semibold">aka: Batman</h4>
