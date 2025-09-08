@@ -13,7 +13,7 @@ import {
 type BlogPost = {
   title: string;
   preview: string;
-  mediumUrl?: string; // Make mediumUrl optional
+  mediumUrl?: string;
 };
 
 const blogPosts: BlogPost[] = [
@@ -46,7 +46,7 @@ export function BlogCards() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                <Card className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
                   <CardContent className="flex flex-col aspect-square items-center justify-center p-6 text-center">
                     <h3 className="text-lg font-semibold mb-2">{post.title}</h3>
                     <p className="text-xs text-muted-foreground line-clamp-2">
