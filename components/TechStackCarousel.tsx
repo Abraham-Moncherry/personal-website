@@ -1,7 +1,13 @@
 import React from "react";
 import { useTheme } from "next-themes";
 
-const VercelLogo = ({ size = 48, className = "" }: { size?: number; className?: string }) => (
+const VercelLogo = ({
+  size = 48,
+  className = "",
+}: {
+  size?: number;
+  className?: string;
+}) => (
   <svg
     width={size}
     height={size}
@@ -70,6 +76,8 @@ const techStack: TechItem[] = [
   {
     name: "AWS",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    darkIcon:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
     alt: "AWS",
   },
   {
@@ -124,10 +132,15 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
               className="flex-shrink-0 w-14 h-14 md:w-20 md:h-20 mx-2 md:mx-4 flex items-center justify-center"
             >
               {tech.name === "Vercel" ? (
-                <VercelLogo size={40} className="md:w-12 md:h-12 text-black dark:text-white" />
+                <VercelLogo
+                  size={40}
+                  className="md:w-12 md:h-12 text-black dark:text-white"
+                />
               ) : (
                 <img
-                  src={tech.icon}
+                  src={
+                    tech.darkIcon && theme == "dark" ? tech.darkIcon : tech.icon
+                  }
                   alt={tech.alt}
                   className="w-10 h-10 md:w-12 md:h-12 object-contain"
                 />
@@ -142,10 +155,15 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
               className="flex-shrink-0 w-14 h-14 md:w-20 md:h-20 mx-2 md:mx-4 flex items-center justify-center"
             >
               {tech.name === "Vercel" ? (
-                <VercelLogo size={40} className="md:w-12 md:h-12 text-black dark:text-white" />
+                <VercelLogo
+                  size={40}
+                  className="md:w-12 md:h-12 text-black dark:text-white"
+                />
               ) : (
                 <img
-                  src={tech.icon}
+                  src={
+                    tech.darkIcon && theme == "dark" ? tech.darkIcon : tech.icon
+                  }
                   alt={tech.alt}
                   className="w-10 h-10 md:w-12 md:h-12 object-contain"
                 />
