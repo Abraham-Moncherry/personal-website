@@ -1,4 +1,3 @@
-import { BlogCards } from "@/components/blogCards";
 import MediumFeed from "@/components/MediumFeed";
 
 export default async function Page() {
