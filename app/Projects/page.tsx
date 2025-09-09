@@ -4,7 +4,7 @@ export default async function Page() {
       <h1 className="text-3xl md:text-4xl font-bold mb-8">My Projects</h1>
       <div className="max-w-2xl w-full text-center mb-8"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
-        <div className="p-6 border rounded-lg shadow-sm hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
+        <div className="p-6 border rounded-lg hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
           <a
             href="https://github.com/Abraham-Moncherry/personal-website"
             target="_blank"
@@ -18,7 +18,7 @@ export default async function Page() {
             </p>
           </a>
         </div>
-        <div className="p-6 border rounded-lg shadow-sm hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
+        <div className="p-6 border rounded-lg hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
           <a
             href="https://github.com/Abraham-Moncherry/Facial-Recognition-Student-System"
             target="_blank"
@@ -34,7 +34,7 @@ export default async function Page() {
             </p>
           </a>
         </div>
-        <div className="p-6 border rounded-lg shadow-sm hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
+        <div className="p-6 border rounded-lg hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-shadow">
           <a
             href="https://github.com/Abraham-Moncherry/Flapry-Bird"
             target="_blank"
