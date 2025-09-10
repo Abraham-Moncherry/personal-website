@@ -33,19 +33,33 @@ function makeSnippet(item: FeedItem, maxLen = 180) {
 }
 
 export default async function MediumFeed() {
-  const parser = new Parser<{ items: FeedItem[] }>({
-    customFields: {
-      item: [
-        ["dc:creator", "creator"],
-        ["content:encoded", "contentEncoded"],
-      ],
-    },
-  });
+  let items: FeedItem[] = [];
+  
+  try {
+    const parser = new Parser<{ items: FeedItem[] }>({
+      customFields: {
+        item: [
+          ["dc:creator", "creator"],
+          ["content:encoded", "contentEncoded"],
+        ],
+      },
+    });
 
-  const feed = await parser.parseURL(
-    "https://medium.com/feed/@abraham.m.moncherry"
-  );
-  const items = feed.items.slice(0, 5);
+    const feed = await parser.parseURL(
+      "https://medium.com/feed/@abraham.m.moncherry"
+    );
+    items = feed.items.slice(0, 5);
+  } catch (error) {
+    console.error('Failed to fetch Medium RSS feed:', error);
+    // Return empty state or fallback content
+    return (
+      <div className="flex justify-center">
+        <div className="text-center text-neutral-500">
+          Unable to load blog posts at the moment.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center">
