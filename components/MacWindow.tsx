@@ -19,7 +19,11 @@ export function MacWindow({
           {title}
         </span>
       </div>
-      <div>{children}</div>
+      <div className="relative w-full h-[200px] md:h-[300px] overflow-hidden">
+        <div className="w-full h-full [&>img]:w-full [&>img]:h-full [&>img]:object-cover">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

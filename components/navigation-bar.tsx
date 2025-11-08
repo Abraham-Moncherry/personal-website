@@ -21,10 +21,10 @@ export function NavigationMenuDemo() {
           <Link href="/About">About</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/Blogs">Blogs</Link>
+          <Link href="/Projects">Projects</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/Projects">Projects</Link>
+          <Link href="/Blogs">Blogs</Link>
         </NavigationMenuLink>
       </NavigationMenuList>
     </NavigationMenu>
