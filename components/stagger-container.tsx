@@ -51,36 +51,7 @@ export function StaggerContainer({
         },
       }}
     >
-      {Array.isArray(children) &&
-        children.map((child, idx) => (
-          <motion.div
-            key={idx}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: childDuration, ease: "easeOut" },
-              },
-            }}
-          >
-            {child}
-          </motion.div>
-        ))}
-      {!Array.isArray(children) && (
-        <motion.div
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: childDuration, ease: "easeOut" },
-            },
-          }}
-        >
-          {children}
-        </motion.div>
-      )}
+      {children}
     </motion.div>
   );
 }

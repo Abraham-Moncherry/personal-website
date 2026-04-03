@@ -34,15 +34,17 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            {/* Frosted glass nav */}
+            {/* Frosted glass nav - centered nav, dark mode on right */}
             <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/40">
-              <div className="flex items-center justify-between px-4 md:px-6 py-3 max-w-6xl mx-auto">
-                <NavigationMenuDemo />
+              <div className="flex items-center justify-between px-4 md:px-6 py-3">
+                <div className="flex-1 flex justify-center">
+                  <NavigationMenuDemo />
+                </div>
                 <ModeToggle />
               </div>
             </header>
