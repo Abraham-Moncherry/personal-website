@@ -1,6 +1,8 @@
-import { MacWindow } from "@/components/MacWindow";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { ProjectCard } from "@/components/project-card";
+import { SectionHeader } from "@/components/section-header";
+import { StaggerContainer } from "@/components/stagger-container";
 
 interface Project {
   title: string;
@@ -15,36 +17,36 @@ const projects: Project[] = [
   {
     title: "Mental Health Chatbot",
     image: "/mch.png",
-    alt: "Mental Health Chatbot",
+    alt: "Mental Health Chatbot interface",
     description:
-      "An intelligent RAG (Retrieval-Augmented Generation) chatbot system for mental health services information with continuous conversation support",
+      "An intelligent RAG-powered chatbot system that provides accurate mental health services information and support through continuous, context-aware conversation.",
     codeUrl: "https://github.com/IT-Project-5F/mental-health-chat-bot",
     demoUrl: "https://mch-staging.mooo.com/",
   },
   {
     title: "Garden Of Love",
     image: "/garden-of-love.png",
-    alt: "Garden Of Love",
+    alt: "Garden of Love 3D game",
     description:
-      "A 3D miniature adventure game built in Unity, where Elara, a cursed protagonist, must battle towering creatures across a mystical garden to reunite with her lover. Only true love's kiss can break the spell and return her to her normal form.",
+      "A 3D miniature adventure game in Unity featuring Elara's quest through a mystical garden. Navigate towering obstacles and challenges to break her curse — only true love's kiss can restore her.",
     codeUrl: "https://github.com/Abraham-Moncherry/garden-of-love",
     demoUrl: "https://abraham-moncherry.github.io/garden-of-love-web/",
   },
   {
     title: "Personal Website",
     image: "/personal-website.png",
-    alt: "Personal Website",
+    alt: "Personal website with AI agent",
     description:
-      "A Next.js website with AI integration featuring Selina, my professional agent.",
+      "A modern Next.js portfolio showcasing AI integration. Features Selina, my RAG-based professional agent, for interactive conversational exploration of projects and skills.",
     codeUrl: "https://github.com/Abraham-Moncherry/personal-website",
     demoUrl: "https://abrahamm.dev/",
   },
   {
-    title: "Facial Recognition Student System",
+    title: "Facial Recognition System",
     image: "/facial-recognition.png",
-    alt: "Facial Recognition Student System",
+    alt: "Facial recognition interface",
     description:
-      "Facial recognition system that identies students saved in the database and display student details.",
+      "An intelligent system that identifies students from a database using facial recognition technology and dynamically displays their verified information and records.",
     codeUrl: "https://github.com/Abraham-Moncherry/Facial-Recognition-Student-System",
     demoUrl: "https://github.com/Abraham-Moncherry/Facial-Recognition-Student-System",
   },
@@ -52,61 +54,32 @@ const projects: Project[] = [
     title: "Flarpy Bird",
     image: "/flarpyBird.png",
     alt: "Flarpy Bird game",
-    description: "Flarpy Bird is a Flappy Bird-style game built in Unity.",
+    description:
+      "A dynamic twist on the classic Flappy Bird game, built in Unity with enhanced mechanics, smooth physics, and engaging gameplay challenges.",
     codeUrl: "https://github.com/Abraham-Moncherry/Flapry-Bird",
     demoUrl: "https://abraham-moncherry.github.io/Flarpy-Bird-Web/",
   },
 ];
 
-function ProjectCard({ project }: { project: Project }) {
+export default function Page() {
   return (
-    <div className="w-full max-w-[600px]">
-      <div className="flex flex-col h-full">
-        <MacWindow title={project.title}>
-          <Image
-            src={project.image}
-            alt={project.alt}
-            fill
-            className="object-cover"
-          />
-        </MacWindow>
-        <p className="text-gray-600 flex-grow py-2">{project.description}</p>
-        <div className="flex gap-3 pt-2">
-          <Button variant="secondary" asChild>
-            <a
-              href={project.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Code
-            </a>
-          </Button>
-          <Button asChild>
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Demo
-            </a>
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
+    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-24 md:py-32">
+      <div className="w-full max-w-6xl">
+        <SectionHeader
+          label="Portfolio"
+          title="Projects I've built"
+          subtitle="A collection of work spanning AI, web development, games, and machine learning"
+        />
 
-export default async function Page() {
-  return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center p-4 md:p-8">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-        My Projects
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-2 md:gap-y-2 md:gap-x-25 py-1 max-w-6xl w-full justify-items-center">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
+        {/* Projects grid */}
+        <StaggerContainer staggerDelay={0.15} childDuration={0.6}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {projects.map((project) => (
+              <ProjectCard key={project.title} {...project} />
+            ))}
+          </div>
+        </StaggerContainer>
       </div>
-    </div>
+    </main>
   );
 }

@@ -34,19 +34,22 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           <div className="flex flex-col min-h-screen">
-            <div className="flex p-3 justify-between">
-              <NavigationMenuDemo />
-              <ModeToggle />
-            </div>
-            <div className="flex-1 py-2">{children}</div>
-            <div className="py-0.5">
+            {/* Frosted glass nav */}
+            <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/40">
+              <div className="flex items-center justify-between px-4 md:px-6 py-3 max-w-6xl mx-auto">
+                <NavigationMenuDemo />
+                <ModeToggle />
+              </div>
+            </header>
+            <div className="flex-1">{children}</div>
+            <footer className="border-t border-border/40">
               <SocialsFoooter />
-            </div>
+            </footer>
           </div>
         </ThemeProvider>
       </body>

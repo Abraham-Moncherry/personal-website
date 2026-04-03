@@ -3,43 +3,58 @@
 import { useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useState } from "react";
 import { isInAppBrowser, supportsWebRTC } from "@/lib/browser-utils";
+import { VoiceOrb } from "@/components/ui/VoiceOrb";
+
+type OrbState = "idle" | "listening" | "speaking";
 
 export function Conversation() {
   const [isInApp, setIsInApp] = useState(false);
   const [hasWebRTC, setHasWebRTC] = useState(true);
   const [showError, setShowError] = useState(false);
+  const [orbState, setOrbState] = useState<OrbState>("idle");
 
   const conversation = useConversation({
-    onConnect: () => console.log("Connected"),
-    onDisconnect: () => console.log("Disconnected"),
-    onMessage: (message) => console.log("Message:", message),
+    onConnect: () => setOrbState("listening"),
+    onDisconnect: () => setOrbState("idle"),
+    onMessage: () => setOrbState("speaking"),
     onError: (error) => {
       console.error("Error:", error);
       setShowError(true);
+      setOrbState("idle");
     },
   });
 
   useEffect(() => {
-    // Check if we're in an in-app browser and if WebRTC is supported
     setIsInApp(isInAppBrowser());
     setHasWebRTC(supportsWebRTC());
   }, []);
 
-  const startConversation = useCallback(async () => {
+  // Track speaking vs listening based on agent status
+  useEffect(() => {
+    if (conversation.isSpeaking) {
+      setOrbState("speaking");
+    } else if (conversation.status === "connected") {
+      setOrbState("listening");
+    }
+  }, [conversation.isSpeaking, conversation.status]);
+
+  const toggleConversation = useCallback(async () => {
+    if (conversation.status === "connected") {
+      await conversation.endSession();
+      setShowError(false);
+      setOrbState("idle");
+      return;
+    }
+
     try {
-      // Check WebRTC support before attempting to start
       if (!supportsWebRTC()) {
         setShowError(true);
         return;
       }
 
-      // Request microphone permission
       await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      // Start the conversation with your agent
       await conversation.startSession({
         agentId: "agent_4101k4a84me1fd7v14pn2j0aprx7",
-        userId: "YOUR_CUSTOMER_USER_ID",
         connectionType: "webrtc",
       });
       setShowError(false);
@@ -49,49 +64,26 @@ export function Conversation() {
     }
   }, [conversation]);
 
-  const stopConversation = useCallback(async () => {
-    await conversation.endSession();
-    setShowError(false);
-  }, [conversation]);
-
-  // Show warning for in-app browsers
-  if (isInApp || !hasWebRTC) {
-    return (
-      <div className="flex flex-col items-center gap-4 text-center">
-        <div className="text-sm text-orange-500 max-w-xs">
-          ⚠️ Voice chat only works in a regular browser. Please open in browser
-          of choice.
-        </div>
-      </div>
-    );
-  }
+  const getLabel = () => {
+    if (isInApp || !hasWebRTC) return "Open in browser for voice";
+    if (showError) return "Tap to retry";
+    if (orbState === "speaking") return "Selina is speaking...";
+    if (orbState === "listening") return "Listening... tap to end";
+    return "Tap to talk with Selina";
+  };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center">
+      <VoiceOrb
+        state={orbState}
+        onClick={isInApp || !hasWebRTC ? undefined : toggleConversation}
+        label={getLabel()}
+      />
       {showError && (
-        <div className="text-sm text-red-500 text-center max-w-xs">
-          Unable to start voice chat. Please ensure microphone access is
-          enabled.
-        </div>
+        <p className="mt-4 text-sm text-red-400/80 text-center max-w-xs animate-fade-up">
+          Please enable microphone access to chat with Selina.
+        </p>
       )}
-      <div className="flex gap-2">
-        <button
-          onClick={startConversation}
-          disabled={conversation.status === "connected"}
-          className="px-4 py-2 bg-purple-300 border-2 hover:border-orange-400 hover:bg-purple-400 text-white rounded-2xl disabled:bg-gray-300 touch-manipulation"
-          style={{ WebkitTapHighlightColor: "transparent" }}
-        >
-          Start
-        </button>
-        <button
-          onClick={stopConversation}
-          disabled={conversation.status !== "connected"}
-          className="px-4 py-2 bg-red-400 border-2 hover:border-orange-400 hover:bg-red-500 text-white rounded-2xl disabled:bg-gray-300 touch-manipulation"
-          style={{ WebkitTapHighlightColor: "transparent" }}
-        >
-          Stop
-        </button>
-      </div>
     </div>
   );
 }

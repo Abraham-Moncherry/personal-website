@@ -7,4 +7,13 @@ const nextConfig: NextConfig = {
       dynamic: 30, // 30 seconds
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
+  },
 };

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   NavigationMenu,
@@ -10,22 +11,35 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/About", label: "About" },
+  { href: "/Projects", label: "Projects" },
+  { href: "/Blogs", label: "Blogs" },
+];
+
 export function NavigationMenuDemo() {
+  const pathname = usePathname();
+
   return (
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/">Home</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/About">About</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/Projects">Projects</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/Blogs">Blogs</Link>
-        </NavigationMenuLink>
+        {links.map(({ href, label }) => {
+          const isActive = pathname === href;
+          return (
+            <NavigationMenuLink
+              key={href}
+              asChild
+              className={`${navigationMenuTriggerStyle()} relative transition-all duration-200 ${
+                isActive
+                  ? "text-foreground font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Link href={href}>{label}</Link>
+            </NavigationMenuLink>
+          );
+        })}
       </NavigationMenuList>
     </NavigationMenu>
   );
