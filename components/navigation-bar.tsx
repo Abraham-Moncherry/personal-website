@@ -45,13 +45,13 @@ export function NavigationMenuDemo() {
             href={href}
             className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 relative ${
               isActive
-                ? "text-foreground font-semibold"
+                ? "text-primary font-semibold"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {label}
             {isActive && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-violet-400 rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
             )}
           </a>
         );

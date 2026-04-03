@@ -57,18 +57,18 @@ export function MediumFeedWrapper() {
         {items.map((item, i) => (
           <article
             key={i}
-            className="rounded-2xl border border-border p-6 flex flex-col hover:border-violet-400/50 transition-colors"
+            className="rounded-2xl bg-card border border-border/20 p-6 flex flex-col hover:bg-muted/20 transition-colors"
           >
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3 font-label">
               {item.pubDate}
             </p>
 
-            <h3 className="text-xl font-bold leading-snug mb-3 flex-grow">
+            <h3 className="text-xl font-black leading-snug mb-3 flex-grow font-headline">
               <a
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-violet-400 transition-colors"
+                className="hover:text-primary transition-colors"
               >
                 {item.title}
               </a>
@@ -84,7 +84,7 @@ export function MediumFeedWrapper() {
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-violet-400 hover:text-violet-300 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               Read more
               <ExternalLink className="w-4 h-4" />

@@ -13,7 +13,7 @@ export function SectionHeader({ label, title, subtitle }: SectionHeaderProps) {
     <ViewportReveal delay={0}>
       <div className="flex flex-col items-center gap-3 md:gap-4 mb-12 md:mb-16">
         {label && (
-          <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-violet-400">
+          <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-amber-600">
             {label}
           </span>
         )}
