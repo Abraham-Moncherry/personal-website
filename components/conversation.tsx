@@ -3,7 +3,7 @@
 import { useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useState } from "react";
 import { isInAppBrowser, supportsWebRTC } from "@/lib/browser-utils";
-import { VoiceOrb } from "@/components/ui/VoiceOrb";
+import { PlasmaOrb } from "@/components/ui/PlasmaOrb";
 
 type OrbState = "idle" | "listening" | "speaking";
 
@@ -72,15 +72,40 @@ export function Conversation() {
     return "Tap to talk with Selina";
   };
 
+  const isActive = orbState === "listening" || orbState === "speaking";
+  const isSpeaking = orbState === "speaking";
+
+  const orbProps = {
+    pulseSpeed: isSpeaking ? 1.2 : isActive ? 1.8 : 2.3,
+    pulseIntensity: isSpeaking ? 1.35 : isActive ? 1.25 : 1.19,
+    glowAmount: isSpeaking ? 1.3 : isActive ? 1.1 : 0.85,
+    coreBrightness: isSpeaking ? 1.8 : isActive ? 1.65 : 1.5,
+    hueShift: isSpeaking ? -30 : 17,
+  };
+
+  const clickable = !(isInApp || !hasWebRTC);
+
   return (
-    <div className="flex flex-col items-center">
-      <VoiceOrb
-        state={orbState}
-        onClick={isInApp || !hasWebRTC ? undefined : toggleConversation}
-        label={getLabel()}
-      />
+    <div className="flex flex-col items-center gap-6">
+      <button
+        onClick={clickable ? toggleConversation : undefined}
+        className="group relative cursor-pointer focus:outline-none transition-transform duration-500 ease-out hover:scale-[1.06] hover:-rotate-3 active:scale-[0.96]"
+        aria-label={getLabel()}
+        disabled={!clickable}
+      >
+        <PlasmaOrb size={240} {...orbProps} />
+      </button>
+
+      <span
+        className={`text-sm font-medium tracking-wide transition-all duration-500 ${
+          isActive ? "text-amber-600 opacity-100" : "text-muted-foreground opacity-70"
+        }`}
+      >
+        {getLabel()}
+      </span>
+
       {showError && (
-        <p className="mt-4 text-sm text-red-400/80 text-center max-w-xs animate-fade-up">
+        <p className="mt-2 text-sm text-red-400/80 text-center max-w-xs animate-fade-up">
           Please enable microphone access to chat with Selina.
         </p>
       )}
