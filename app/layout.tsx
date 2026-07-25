@@ -78,7 +78,7 @@ export default function RootLayout({
 
               <div className="relative flex items-center justify-between px-4 md:px-6 py-5 md:py-6 max-w-7xl mx-auto w-full">
                 {/* Left: Logo */}
-                <div className="hidden lg:block min-w-fit">
+                <div className="flex w-10 shrink-0 items-center justify-start">
                   <Image
                     src="/favicon.ico"
                     alt="Abraham"
@@ -94,7 +94,7 @@ export default function RootLayout({
                 </div>
 
                 {/* Right: Mode Toggle */}
-                <div className="min-w-fit">
+                <div className="flex w-10 shrink-0 justify-end">
                   <ModeToggle />
                 </div>
               </div>
