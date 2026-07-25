@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Geist, Geist_Mono, Manrope, Inter, Space_Grotesk } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Manrope,
+  Inter,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { NavigationMenuDemo } from "@/components/navigation-bar";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -36,7 +42,8 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Abraham - Portfolio",
-  description: "AI Software Engineer building with relentless focus on impact. Explore my projects, work, and ideas.",
+  description:
+    "AI Software Engineer building with relentless focus on impact. Explore my projects, work, and ideas.",
 };
 
 export default function RootLayout({
@@ -58,15 +65,25 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen">
             {/* Frosted glass nav - centered nav, dark mode on right */}
-            <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/40">
-              <div className="flex items-center justify-between px-4 md:px-6 py-4 max-w-7xl mx-auto w-full">
+            <header className="sticky top-0 z-50 overflow-hidden border-b border-border/40">
+              <Image
+                src="/header-plate.png"
+                alt=""
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center dark:brightness-[0.58] dark:saturate-[0.78]"
+              />
+              <div className="absolute inset-0 bg-background/30 backdrop-blur-[0.5px] dark:bg-background/28" />
+
+              <div className="relative flex items-center justify-between px-4 md:px-6 py-5 md:py-6 max-w-7xl mx-auto w-full">
                 {/* Left: Logo */}
                 <div className="hidden lg:block min-w-fit">
                   <Image
                     src="/favicon.ico"
                     alt="Abraham"
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     className="rounded-full object-cover"
                   />
                 </div>

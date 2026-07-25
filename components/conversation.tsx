@@ -80,7 +80,7 @@ export function Conversation() {
     pulseIntensity: isSpeaking ? 1.35 : isActive ? 1.25 : 1.19,
     glowAmount: isSpeaking ? 1.3 : isActive ? 1.1 : 0.85,
     coreBrightness: isSpeaking ? 1.8 : isActive ? 1.65 : 1.5,
-    hueShift: isSpeaking ? -30 : 17,
+    hueShift: isSpeaking ? -5 : isActive ? 4 : 0,
   };
 
   const clickable = !(isInApp || !hasWebRTC);
@@ -98,7 +98,9 @@ export function Conversation() {
 
       <span
         className={`text-sm font-medium tracking-wide transition-all duration-500 ${
-          isActive ? "text-amber-600 opacity-100" : "text-muted-foreground opacity-70"
+          isActive
+            ? "text-[#79654e] dark:text-[#dfcaaa] opacity-100"
+            : "text-muted-foreground opacity-70"
         }`}
       >
         {getLabel()}

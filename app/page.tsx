@@ -46,15 +46,6 @@ const projects: Project[] = [
     demoUrl: "https://abraham-moncherry.github.io/garden-of-love-web/",
   },
   {
-    title: "Personal Website",
-    image: "/personal-website.png",
-    alt: "Personal website with AI agent",
-    description:
-      "A modern Next.js portfolio showcasing AI integration. Features Selina, my RAG-based professional agent, for interactive conversational exploration of projects and skills.",
-    codeUrl: "https://github.com/Abraham-Moncherry/personal-website",
-    demoUrl: "https://abrahamm.dev/",
-  },
-  {
     title: "Facial Recognition System",
     image: "/facial-recognition.png",
     alt: "Facial recognition interface",
@@ -92,7 +83,7 @@ export default function Home() {
             className="w-96 h-96 md:w-[600px] md:h-[600px] rounded-full blur-3xl opacity-20"
             style={{
               background:
-                "linear-gradient(135deg, rgba(120,90,0,0.8) 0%, rgba(254,147,44,0.4) 100%)",
+                "linear-gradient(135deg, rgba(121,101,78,0.68) 0%, rgba(183,155,120,0.42) 55%, rgba(215,195,162,0.34) 100%)",
             }}
           />
         </div>
@@ -164,16 +155,13 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Two-column layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16">
-            {/* Left: Bio (md:col-span-2) */}
+          {/* Bio */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             <div className="md:col-span-2 space-y-6">
               <ViewportReveal delay={0.2}>
                 <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                  Final year Computer Science student at the{" "}
-                  <strong>University of Melbourne</strong>. Currently working as
-                  an AI Engineer at <strong>Heya Voice AI</strong>, a voice AI
-                  startup in Melbourne.
+                  Computer Science graduate from the{" "}
+                  <strong>University of Melbourne</strong>.
                 </p>
               </ViewportReveal>
 
@@ -194,13 +182,45 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tech Carousel Section */}
-          <div className="space-y-8 md:space-y-12 mt-20 md:mt-32">
+          {/* Experience timeline */}
+          <div className="mt-16 md:mt-24">
             <ViewportReveal delay={0.5}>
-              <div className="flex flex-col items-center gap-4 mb-12"></div>
+              <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
+                Experience
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black tracking-tight mt-2 font-headline">
+                Where I&apos;ve been
+              </h3>
             </ViewportReveal>
 
             <ViewportReveal delay={0.6}>
+              <div className="relative mt-10 pl-8 md:pl-10">
+                <div className="absolute left-[7px] top-2 bottom-0 w-px bg-border" />
+                <div className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-4 border-background bg-primary ring-1 ring-primary" />
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between max-w-3xl">
+                  <div>
+                    <h4 className="text-lg md:text-xl font-black font-headline">
+                      Heya Voice AI
+                    </h4>
+                    <p className="mt-1 text-sm md:text-base text-muted-foreground">
+                      AI Software Engineer
+                    </p>
+                  </div>
+                  <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-muted-foreground font-label">
+                    Mar 2025 — Present
+                  </span>
+                </div>
+              </div>
+            </ViewportReveal>
+          </div>
+
+          {/* Tech Carousel Section */}
+          <div className="space-y-8 md:space-y-12 mt-20 md:mt-32">
+            <ViewportReveal delay={0.7}>
+              <div className="flex flex-col items-center gap-4 mb-12"></div>
+            </ViewportReveal>
+
+            <ViewportReveal delay={0.8}>
               <TechStackCarousel animationDuration={25} />
             </ViewportReveal>
           </div>
@@ -215,7 +235,7 @@ export default function Home() {
         className="flex flex-col items-center px-6 py-16 md:py-24 bg-muted/10"
       >
         <div className="w-full max-w-6xl">
-          <div className="flex justify-between items-end mb-16">
+          <div className="mb-16">
             <div>
               <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
                 Portfolio
@@ -224,9 +244,6 @@ export default function Home() {
                 Projects I've built
               </h2>
             </div>
-            <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-muted-foreground font-label hidden md:block">
-              2023 — 2026
-            </span>
           </div>
 
           {/* Projects grid */}

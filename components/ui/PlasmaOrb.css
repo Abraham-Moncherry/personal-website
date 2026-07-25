@@ -3,7 +3,7 @@
   --pulse-max: 1.19;
   --glow: 0.85;
   --core-bright: 1.5;
-  --hue: 17deg;
+  --hue: 0deg;
   filter: hue-rotate(var(--hue));
   transition: filter 0.5s ease;
 }
@@ -21,8 +21,8 @@
   animation-duration: 1.2s;
   filter: brightness(calc(var(--core-bright) * 1.15));
   box-shadow:
-    0 30px 90px rgba(254, 147, 44, 0.55),
-    0 0 160px rgba(254, 147, 44, 0.45);
+    0 30px 90px rgba(183, 155, 120, 0.55),
+    0 0 160px rgba(215, 195, 162, 0.42);
 }
 
 .plasma-orb:hover .plasma-orb__blobs {
@@ -37,7 +37,7 @@
   position: absolute;
   inset: -40px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(254, 147, 44, 0.5), transparent 65%);
+  background: radial-gradient(circle, rgba(215, 195, 162, 0.5), transparent 65%);
   filter: blur(16px);
   animation: plasma-orb-halo-pulse var(--pulse-speed) ease-in-out infinite;
   opacity: calc(var(--glow) * 1);
@@ -48,10 +48,10 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #4a2c0a;
+  background: #463b30;
   box-shadow:
-    0 25px 70px rgba(254, 147, 44, 0.4),
-    0 0 120px rgba(254, 147, 44, 0.3);
+    0 25px 70px rgba(161, 132, 99, 0.42),
+    0 0 120px rgba(215, 195, 162, 0.34);
   overflow: hidden;
   animation: plasma-orb-core-pulse var(--pulse-speed) ease-in-out infinite;
   filter: brightness(var(--core-bright));
@@ -61,9 +61,9 @@
   position: absolute;
   inset: -20px;
   background:
-    radial-gradient(circle at 30% 40%, #fe932c 0%, transparent 40%),
-    radial-gradient(circle at 70% 65%, #ffce57 0%, transparent 35%),
-    radial-gradient(circle at 50% 30%, #fff6ec 0%, transparent 20%);
+    radial-gradient(circle at 30% 40%, #aa8c68 0%, transparent 40%),
+    radial-gradient(circle at 70% 65%, #d7c3a2 0%, transparent 35%),
+    radial-gradient(circle at 50% 30%, #f3ead7 0%, transparent 20%);
   filter: blur(6px);
   animation: plasma-orb-drift 6s ease-in-out infinite;
 }
@@ -74,7 +74,7 @@
   border-radius: 50%;
   box-shadow:
     inset 0 0 40px rgba(0, 0, 0, 0.45),
-    inset 0 0 2px rgba(255, 206, 87, 0.6);
+    inset 0 0 2px rgba(239, 222, 192, 0.68);
 }
 
 .plasma-orb__specular {

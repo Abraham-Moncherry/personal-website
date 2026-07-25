@@ -1,15 +1,23 @@
 "use client";
 
+import Image from "next/image";
+
 export function SocialsFoooter() {
   return (
-    <footer className="w-full py-12 md:py-16 border-t border-border/20">
-      <div className="flex flex-col md:flex-row justify-between items-center px-6 max-w-7xl mx-auto gap-8 md:gap-0">
-        {/* Left: Name */}
-        <div className="font-headline font-black text-lg">
-          Abraham Moncherry
-        </div>
+    <div className="w-full">
+      <div className="relative h-28 sm:h-36 md:h-44 lg:h-48 overflow-hidden">
+        <Image
+          src="/editorial-balance.webp"
+          alt="A collage of a balancing rock, textured paper, and a pale pink flower"
+          fill
+          sizes="100vw"
+          className="object-cover object-[center_43%] transition-[filter] duration-500 dark:brightness-[0.68] dark:saturate-[0.78]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background/55 pointer-events-none" />
+      </div>
 
-        {/* Center: Social Links */}
+      <div className="flex flex-col md:flex-row justify-between items-center px-6 py-10 md:py-12 max-w-7xl mx-auto gap-6">
+        {/* Social Links */}
         <div className="flex gap-8">
           <a
             href="https://linkedin.com/in/abrahammoncherry"
@@ -36,10 +44,10 @@ export function SocialsFoooter() {
         </div>
 
         {/* Right: Copyright */}
-        <div className="text-xs font-label uppercase tracking-widest text-muted-foreground">
+        <div className="text-center md:text-right text-xs font-label uppercase tracking-widest text-muted-foreground">
           © 2025 Abraham Moncherry
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

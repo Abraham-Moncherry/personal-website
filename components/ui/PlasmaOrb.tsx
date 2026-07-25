@@ -13,7 +13,7 @@ type PlasmaOrbProps = {
   glowAmount?: number;
   /** Brightness filter on the core. 1 = normal, 1.8 = very bright. */
   coreBrightness?: number;
-  /** Hue rotation in degrees. 0 = amber, +60 = yellow, -30 = red. */
+  /** Hue rotation in degrees. 0 = warm beige. */
   hueShift?: number;
   className?: string;
 };
@@ -24,7 +24,7 @@ export function PlasmaOrb({
   pulseIntensity = 1.19,
   glowAmount = 0.85,
   coreBrightness = 1.5,
-  hueShift = 17,
+  hueShift = 0,
   className,
 }: PlasmaOrbProps) {
   const ref = useRef<HTMLDivElement>(null);

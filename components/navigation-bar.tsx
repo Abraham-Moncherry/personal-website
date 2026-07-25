@@ -45,13 +45,13 @@ export function NavigationMenuDemo() {
             href={href}
             className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 relative ${
               isActive
-                ? "text-primary font-semibold"
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-[#252929] dark:text-[#f2eee7] font-semibold"
+                : "text-[#414646] hover:text-[#202424] dark:text-[#c7c3bc] dark:hover:text-white"
             }`}
           >
             {label}
             {isActive && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#735f4c] dark:bg-[#d8c4a5] rounded-full" />
             )}
           </a>
         );

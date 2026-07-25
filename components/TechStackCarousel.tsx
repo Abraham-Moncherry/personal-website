@@ -119,8 +119,6 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
 }) => {
   const { theme } = useTheme();
 
-  const duplicatedStack = [...techStack, ...techStack];
-
   return (
     <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
       <div className="relative overflow-hidden py-12 md:py-16">
@@ -129,54 +127,62 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
         <motion.div
-          className="flex gap-8 md:gap-16 items-center"
-          animate={{ x: [0, -1000] }}
+          className="flex w-max items-center"
+          animate={{ x: ["0%", "-50%"] }}
           transition={{
             duration: animationDuration,
             repeat: Infinity,
             ease: "linear",
           }}
         >
-          {duplicatedStack.map((tech, index) => (
-            <motion.div
-              key={`${tech.name}-${index}`}
-              className="flex-shrink-0 flex items-center justify-center"
-              whileHover={{ scale: 1.2, y: -12 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          {[0, 1].map((groupIndex) => (
+            <div
+              key={groupIndex}
+              className="flex shrink-0 items-center gap-8 pr-8 md:gap-16 md:pr-16"
+              aria-hidden={groupIndex === 1}
             >
-              <div
-                className="relative flex items-center justify-center group cursor-pointer"
-                title={tech.name}
-              >
-                {tech.name === "Vercel" ? (
-                  <VercelLogo
-                    size={48}
-                    className="w-12 h-12 md:w-16 md:h-16 text-black dark:text-white transition-all duration-300 group-hover:drop-shadow-lg"
-                  />
-                ) : (
-                  <img
-                    src={
-                      tech.darkIcon && theme == "dark"
-                        ? tech.darkIcon
-                        : tech.icon
-                    }
-                    alt={tech.alt}
-                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:drop-shadow-lg"
-                  />
-                )}
-
-                {/* Tooltip on hover */}
+              {techStack.map((tech) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ opacity: 1, y: -40 }}
-                  className="absolute bottom-full mb-2 whitespace-nowrap pointer-events-none"
+                  key={`${groupIndex}-${tech.name}`}
+                  className="flex-shrink-0 flex items-center justify-center"
+                  whileHover={{ scale: 1.2, y: -12 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div className="px-3 py-1 rounded-lg bg-foreground text-background text-xs md:text-sm font-medium">
-                    {tech.name}
+                  <div
+                    className="relative flex items-center justify-center group cursor-pointer"
+                    title={tech.name}
+                  >
+                    {tech.name === "Vercel" ? (
+                      <VercelLogo
+                        size={48}
+                        className="w-12 h-12 md:w-16 md:h-16 text-black dark:text-white transition-all duration-300 group-hover:drop-shadow-lg"
+                      />
+                    ) : (
+                      <img
+                        src={
+                          tech.darkIcon && theme == "dark"
+                            ? tech.darkIcon
+                            : tech.icon
+                        }
+                        alt={groupIndex === 0 ? tech.alt : ""}
+                        className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all duration-300 group-hover:drop-shadow-lg"
+                      />
+                    )}
+
+                    {/* Tooltip on hover */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileHover={{ opacity: 1, y: -40 }}
+                      className="absolute bottom-full mb-2 whitespace-nowrap pointer-events-none"
+                    >
+                      <div className="px-3 py-1 rounded-lg bg-foreground text-background text-xs md:text-sm font-medium">
+                        {tech.name}
+                      </div>
+                    </motion.div>
                   </div>
                 </motion.div>
-              </div>
-            </motion.div>
+              ))}
+            </div>
           ))}
         </motion.div>
       </div>

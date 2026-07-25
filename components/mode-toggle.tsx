@@ -11,7 +11,7 @@ const SoundPlayer = dynamic(() => import("@/components/sound-player"), {
 });
 
 export function ModeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export function ModeToggle() {
   }
 
   function handleClick() {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
 
   return (
@@ -35,17 +35,16 @@ export function ModeToggle() {
       <Button
         variant="ghost"
         className="size-8 transition-transform duration-200 hover:scale-110"
-        onClick={() => {
-          handleClick();
-        }}
+        onClick={handleClick}
+        aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
       >
-        {theme === "dark" ? (
+        {resolvedTheme === "dark" ? (
           <Moon className="size-5" />
         ) : (
           <Sun className="size-5" />
         )}
       </Button>
-      <SoundPlayer soundPath="ui/input_focus" trigger={theme} />
+      <SoundPlayer soundPath="ui/input_focus" trigger={resolvedTheme} />
     </>
   );
 }
