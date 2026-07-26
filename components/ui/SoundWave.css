@@ -1,0 +1,150 @@
+.sound-wave {
+  position: relative;
+  display: grid;
+  width: min(76vw, 300px);
+  height: 190px;
+  place-items: center;
+  isolation: isolate;
+}
+
+.sound-wave__glow {
+  position: absolute;
+  inset: 22% 4%;
+  z-index: -1;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--primary) 30%, transparent),
+    transparent 68%
+  );
+  filter: blur(28px);
+  opacity: 0.7;
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.sound-wave__bars {
+  display: flex;
+  height: 116px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 1.8vw, 9px);
+}
+
+.sound-wave__bar {
+  width: clamp(3px, 1vw, 5px);
+  height: calc(104px * var(--bar-height));
+  min-height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primary) 58%, white),
+    var(--primary) 48%,
+    color-mix(in srgb, var(--secondary) 72%, transparent)
+  );
+  box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 28%, transparent);
+  transform: scaleY(0.28);
+  transform-origin: center;
+  animation: sound-wave-breathe 2.4s ease-in-out infinite;
+  animation-delay: var(--bar-delay);
+  transition: filter 400ms ease;
+}
+
+.sound-wave__baseline {
+  position: absolute;
+  bottom: 30px;
+  width: 64%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--primary) 38%, transparent),
+    transparent
+  );
+}
+
+.sound-wave--listening .sound-wave__bar {
+  animation-name: sound-wave-listen;
+  animation-duration: 1.25s;
+}
+
+.sound-wave--listening .sound-wave__bar,
+.sound-wave--speaking .sound-wave__bar {
+  background: linear-gradient(
+    to bottom,
+    #ff9a9a,
+    #ef4444 48%,
+    #991b1b
+  );
+  box-shadow: 0 0 16px rgb(239 68 68 / 38%);
+}
+
+.sound-wave--listening .sound-wave__glow,
+.sound-wave--speaking .sound-wave__glow {
+  background: radial-gradient(ellipse, rgb(239 68 68 / 38%), transparent 68%);
+}
+
+.sound-wave--listening .sound-wave__baseline,
+.sound-wave--speaking .sound-wave__baseline {
+  background: linear-gradient(to right, transparent, rgb(239 68 68 / 55%), transparent);
+}
+
+.sound-wave--speaking .sound-wave__bar {
+  animation-name: sound-wave-speak;
+  animation-duration: 0.72s;
+  filter: saturate(1.25) brightness(1.08);
+}
+
+.sound-wave__bar--live {
+  animation: none;
+  transform: scaleY(calc(0.16 + (var(--live-level) * 0.84)));
+  transition: transform 70ms linear, filter 400ms ease;
+}
+
+.sound-wave--listening .sound-wave__glow,
+.sound-wave--speaking .sound-wave__glow {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+@keyframes sound-wave-breathe {
+  0%,
+  100% {
+    transform: scaleY(0.22);
+  }
+  50% {
+    transform: scaleY(0.5);
+  }
+}
+
+@keyframes sound-wave-listen {
+  0%,
+  100% {
+    transform: scaleY(0.28);
+  }
+  45% {
+    transform: scaleY(0.68);
+  }
+  70% {
+    transform: scaleY(0.42);
+  }
+}
+
+@keyframes sound-wave-speak {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  35% {
+    transform: scaleY(1);
+  }
+  65% {
+    transform: scaleY(0.52);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sound-wave__bar {
+    animation: none;
+    transform: scaleY(0.46);
+  }
+}

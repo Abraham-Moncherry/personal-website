@@ -75,7 +75,7 @@ export default function Home() {
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-12 md:pt-16 pb-12 overflow-hidden"
+        className="relative flex min-h-0 flex-col items-center justify-start overflow-hidden px-5 pb-10 pt-8 md:min-h-screen md:justify-center md:px-6 md:pb-12 md:pt-16"
       >
         {/* Background orb glow */}
         <div className="absolute inset-0 flex items-center justify-center -z-10">
@@ -88,18 +88,18 @@ export default function Home() {
           />
         </div>
 
-        <div className="w-full max-w-7xl flex flex-col items-center gap-12 md:gap-16">
+        <div className="flex w-full max-w-7xl flex-col items-center gap-8 md:gap-16">
           {/* Text content (centered) */}
           <ViewportReveal delay={0}>
             <div
-              className="flex flex-col gap-6 text-center"
+              className="flex flex-col gap-4 text-center md:gap-6"
               style={{ animation: "fade-up 0.8s ease-out" }}
             >
               <div style={{ animation: "fade-up 0.8s ease-out 0.1s both" }}>
                 <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
                   AI Software Engineer
                 </span>
-                <h1 className="text-5xl md:text-7xl font-black tracking-tight mt-4 md:mt-6 font-headline">
+                <h1 className="mt-3 text-5xl font-black tracking-tight font-headline md:mt-6 md:text-7xl">
                   Abraham
                 </h1>
                 <h1 className="text-5xl md:text-7xl font-black tracking-tight font-headline text-muted-foreground">
@@ -118,18 +118,17 @@ export default function Home() {
                 className="text-sm text-muted-foreground/70"
                 style={{ animation: "fade-up 0.8s ease-out 0.3s both" }}
               >
-                Tap the orb to chat with Selina, my AI agent.
+                Tap the sound wave to chat with Selina, my AI agent.
               </p>
             </div>
           </ViewportReveal>
 
-          {/* Orb (interactive, centered) */}
+          {/* Sound wave (interactive, centered) */}
           <ViewportReveal delay={0.2}>
             <div
               className="flex justify-center"
-              style={{ animation: "float 4s ease-in-out infinite" }}
             >
-              <div className="w-48 h-48 md:w-72 md:h-72">
+              <div className="flex h-48 w-[min(76vw,300px)] items-center justify-center md:h-56">
                 <Conversation />
               </div>
             </div>
@@ -143,10 +142,10 @@ export default function Home() {
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section
         id="about"
-        className="flex flex-col items-center px-6 py-16 md:py-24 bg-muted/10"
+        className="flex flex-col items-center bg-muted/10 px-5 py-12 md:px-6 md:py-24"
       >
         <div className="w-full max-w-7xl">
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
               About
             </span>
@@ -156,12 +155,11 @@ export default function Home() {
           </div>
 
           {/* Bio */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-            <div className="md:col-span-2 space-y-6">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-16">
+            <div className="space-y-4 md:col-span-2 md:space-y-6">
               <ViewportReveal delay={0.2}>
                 <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                  Computer Science graduate from the{" "}
-                  <strong>University of Melbourne</strong>.
+                  Computer Science graduate from the University of Melbourne.
                 </p>
               </ViewportReveal>
 
@@ -183,7 +181,7 @@ export default function Home() {
           </div>
 
           {/* Experience timeline */}
-          <div className="mt-16 md:mt-24">
+          <div className="mt-12 md:mt-24">
             <ViewportReveal delay={0.5}>
               <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
                 Experience
@@ -194,7 +192,7 @@ export default function Home() {
             </ViewportReveal>
 
             <ViewportReveal delay={0.6}>
-              <div className="relative mt-10 pl-8 md:pl-10">
+              <div className="relative mt-6 pl-8 md:mt-10 md:pl-10">
                 <div className="absolute left-[7px] top-2 bottom-0 w-px bg-border" />
                 <div className="absolute left-0 top-2 h-[15px] w-[15px] rounded-full border-4 border-background bg-primary ring-1 ring-primary" />
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between max-w-3xl">
@@ -215,11 +213,7 @@ export default function Home() {
           </div>
 
           {/* Tech Carousel Section */}
-          <div className="space-y-8 md:space-y-12 mt-20 md:mt-32">
-            <ViewportReveal delay={0.7}>
-              <div className="flex flex-col items-center gap-4 mb-12"></div>
-            </ViewportReveal>
-
+          <div className="mt-10 md:mt-32">
             <ViewportReveal delay={0.8}>
               <TechStackCarousel animationDuration={25} />
             </ViewportReveal>
@@ -232,10 +226,10 @@ export default function Home() {
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section
         id="projects"
-        className="flex flex-col items-center px-6 py-16 md:py-24 bg-muted/10"
+        className="flex flex-col items-center bg-muted/10 px-5 py-12 md:px-6 md:py-24"
       >
         <div className="w-full max-w-6xl">
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <div>
               <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
                 Portfolio
@@ -248,7 +242,7 @@ export default function Home() {
 
           {/* Projects grid */}
           <StaggerContainer staggerDelay={0.15} childDuration={0.6}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12">
               {projects.map((project) => (
                 <ProjectCard key={project.title} {...project} />
               ))}
@@ -260,9 +254,9 @@ export default function Home() {
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           CTA SECTION
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="flex flex-col items-center justify-center px-6 py-32 md:py-48 text-center">
+      <section className="flex flex-col items-center justify-center px-5 py-20 text-center md:px-6 md:py-48">
         <div className="max-w-3xl">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight font-headline mb-8">
+          <h2 className="mb-6 text-4xl font-black tracking-tight font-headline md:mb-8 md:text-6xl">
             Let's build the future together.
           </h2>
           <a
@@ -279,10 +273,10 @@ export default function Home() {
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section
         id="blogs"
-        className="flex flex-col items-center px-6 py-16 md:py-24 bg-muted/10"
+        className="flex flex-col items-center bg-muted/10 px-5 py-12 md:px-6 md:py-24"
       >
         <div className="w-full max-w-4xl">
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
               Writing
             </span>

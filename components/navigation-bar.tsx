@@ -36,14 +36,14 @@ export function NavigationMenuDemo() {
   }, []);
 
   return (
-    <nav className="flex items-center gap-1">
+    <nav className="flex items-center gap-0 sm:gap-1">
       {links.map(({ href, label, id }) => {
         const isActive = activeSection === id;
         return (
           <a
             key={href}
             href={href}
-            className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 relative ${
+            className={`relative rounded-md px-2 py-2 text-xs font-medium transition-all duration-200 sm:px-3 sm:text-sm ${
               isActive
                 ? "text-[#252929] dark:text-[#f2eee7] font-semibold"
                 : "text-[#414646] hover:text-[#202424] dark:text-[#c7c3bc] dark:hover:text-white"

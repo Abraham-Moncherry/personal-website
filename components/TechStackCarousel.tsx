@@ -121,7 +121,7 @@ const TechStackCarousel: React.FC<TechStackCarouselProps> = ({
 
   return (
     <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-      <div className="relative overflow-hidden py-12 md:py-16">
+      <div className="relative overflow-hidden py-8 md:py-16">
         {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />

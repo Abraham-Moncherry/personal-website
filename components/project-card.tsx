@@ -74,15 +74,15 @@ export function ProjectCard({
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="flex flex-grow flex-col p-5 md:p-6">
         <h3 className="text-xl md:text-2xl font-black font-headline mb-3">{title}</h3>
-        <p className="text-muted-foreground flex-grow mb-6 leading-relaxed text-sm md:text-base">
+        <p className="mb-4 flex-grow text-sm leading-relaxed text-muted-foreground md:mb-6 md:text-base">
           {description}
         </p>
       </div>
 
       {/* Mobile buttons (visible on small screens) */}
-      <div className="flex gap-3 lg:hidden">
+      <div className="flex gap-3 px-5 pb-5 lg:hidden">
         <Button asChild variant="secondary" className="flex-1">
           <a href={codeUrl} target="_blank" rel="noopener noreferrer">
             Code

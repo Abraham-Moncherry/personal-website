@@ -3,7 +3,7 @@
 import { useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useState } from "react";
 import { isInAppBrowser, supportsWebRTC } from "@/lib/browser-utils";
-import { PlasmaOrb } from "@/components/ui/PlasmaOrb";
+import { SoundWave } from "@/components/ui/SoundWave";
 
 type OrbState = "idle" | "listening" | "speaking";
 
@@ -12,6 +12,7 @@ export function Conversation() {
   const [hasWebRTC, setHasWebRTC] = useState(true);
   const [showError, setShowError] = useState(false);
   const [orbState, setOrbState] = useState<OrbState>("idle");
+  const [audioLevels, setAudioLevels] = useState<number[]>([]);
 
   const conversation = useConversation({
     onConnect: () => setOrbState("listening"),
@@ -38,6 +39,49 @@ export function Conversation() {
     }
   }, [conversation.isSpeaking, conversation.status]);
 
+  // Drive each bar from the live ElevenLabs audio spectrum.
+  useEffect(() => {
+    if (conversation.status !== "connected") {
+      setAudioLevels([]);
+      return;
+    }
+
+    let animationFrame = 0;
+    let lastUpdate = 0;
+
+    const sampleAudio = (time: number) => {
+      if (time - lastUpdate >= 50) {
+        const frequencies = conversation.isSpeaking
+          ? conversation.getOutputByteFrequencyData()
+          : conversation.getInputByteFrequencyData();
+
+        if (frequencies?.length) {
+          const barCount = 17;
+          const usableBins = Math.max(1, Math.floor(frequencies.length * 0.72));
+          const nextLevels = Array.from({ length: barCount }, (_, index) => {
+            const start = Math.floor((index / barCount) * usableBins);
+            const end = Math.max(
+              start + 1,
+              Math.floor(((index + 1) / barCount) * usableBins),
+            );
+            let total = 0;
+            for (let bin = start; bin < end; bin += 1) {
+              total += frequencies[bin] ?? 0;
+            }
+            const normalized = total / (end - start) / 255;
+            return Math.min(1, Math.pow(normalized * 1.9, 0.72));
+          });
+          setAudioLevels(nextLevels);
+        }
+        lastUpdate = time;
+      }
+      animationFrame = requestAnimationFrame(sampleAudio);
+    };
+
+    animationFrame = requestAnimationFrame(sampleAudio);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [conversation.status, conversation.isSpeaking]);
+
   const toggleConversation = useCallback(async () => {
     if (conversation.status === "connected") {
       await conversation.endSession();
@@ -52,6 +96,7 @@ export function Conversation() {
         return;
       }
 
+      setOrbState("listening");
       await navigator.mediaDevices.getUserMedia({ audio: true });
       await conversation.startSession({
         agentId: "agent_4101k4a84me1fd7v14pn2j0aprx7",
@@ -61,6 +106,7 @@ export function Conversation() {
     } catch (error) {
       console.error("Failed to start conversation:", error);
       setShowError(true);
+      setOrbState("idle");
     }
   }, [conversation]);
 
@@ -73,27 +119,17 @@ export function Conversation() {
   };
 
   const isActive = orbState === "listening" || orbState === "speaking";
-  const isSpeaking = orbState === "speaking";
-
-  const orbProps = {
-    pulseSpeed: isSpeaking ? 1.2 : isActive ? 1.8 : 2.3,
-    pulseIntensity: isSpeaking ? 1.35 : isActive ? 1.25 : 1.19,
-    glowAmount: isSpeaking ? 1.3 : isActive ? 1.1 : 0.85,
-    coreBrightness: isSpeaking ? 1.8 : isActive ? 1.65 : 1.5,
-    hueShift: isSpeaking ? -5 : isActive ? 4 : 0,
-  };
-
   const clickable = !(isInApp || !hasWebRTC);
 
   return (
     <div className="flex flex-col items-center gap-6">
       <button
         onClick={clickable ? toggleConversation : undefined}
-        className="group relative cursor-pointer focus:outline-none transition-transform duration-500 ease-out hover:scale-[1.06] hover:-rotate-3 active:scale-[0.96]"
+        className="group relative cursor-pointer rounded-full transition-transform duration-500 ease-out hover:scale-[1.04] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         aria-label={getLabel()}
         disabled={!clickable}
       >
-        <PlasmaOrb size={240} {...orbProps} />
+        <SoundWave state={orbState} levels={audioLevels} />
       </button>
 
       <span

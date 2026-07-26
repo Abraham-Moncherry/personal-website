@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import siteIcon from "./icon.png";
 import {
   Geist,
   Geist_Mono,
@@ -76,15 +77,15 @@ export default function RootLayout({
               />
               <div className="absolute inset-0 bg-background/30 backdrop-blur-[0.5px] dark:bg-background/28" />
 
-              <div className="relative flex items-center justify-between px-4 md:px-6 py-5 md:py-6 max-w-7xl mx-auto w-full">
+              <div className="relative flex w-full items-center justify-between px-4 py-5 md:px-6 md:py-6 lg:px-8 2xl:px-12">
                 {/* Left: Logo */}
                 <div className="flex w-10 shrink-0 items-center justify-start">
                   <Image
-                    src="/favicon.ico"
+                    src={siteIcon}
                     alt="Abraham"
                     width={30}
                     height={30}
-                    className="rounded-full object-cover"
+                    className="h-6 w-6 rounded-full object-cover sm:h-[30px] sm:w-[30px]"
                   />
                 </div>
 

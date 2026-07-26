@@ -5,7 +5,7 @@ import Image from "next/image";
 export function SocialsFoooter() {
   return (
     <div className="w-full">
-      <div className="relative h-28 sm:h-36 md:h-44 lg:h-48 overflow-hidden">
+      <div className="relative h-24 overflow-hidden sm:h-36 md:h-44 lg:h-48">
         <Image
           src="/editorial-balance.webp"
           alt="A collage of a balancing rock, textured paper, and a pale pink flower"
@@ -16,7 +16,7 @@ export function SocialsFoooter() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background/55 pointer-events-none" />
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-center px-6 py-10 md:py-12 max-w-7xl mx-auto gap-6">
+      <div className="flex w-full flex-col items-center justify-between gap-5 px-5 py-8 md:flex-row md:gap-6 md:px-8 md:py-12 2xl:px-12">
         {/* Social Links */}
         <div className="flex gap-8">
           <a
