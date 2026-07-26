@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 
 const links = [
   { href: "#hero", label: "Home", id: "hero" },
@@ -48,6 +49,7 @@ export function NavigationMenuDemo() {
                 ? "text-[#252929] dark:text-[#f2eee7] font-semibold"
                 : "text-[#414646] hover:text-[#202424] dark:text-[#c7c3bc] dark:hover:text-white"
             }`}
+            onClick={() => posthog.capture("nav_link_clicked", { section: id })}
           >
             {label}
             {isActive && (

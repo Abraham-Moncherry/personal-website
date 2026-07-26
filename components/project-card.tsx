@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import posthog from "posthog-js";
 
 interface ProjectCardProps {
   title: string;
@@ -50,7 +51,12 @@ export function ProjectCard({
               variant="secondary"
               className="rounded-lg md:px-6 md:py-2 md:text-base"
             >
-              <a href={codeUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => posthog.capture("project_code_clicked", { project_title: title })}
+              >
                 Code
                 <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1.5" />
               </a>
@@ -64,7 +70,12 @@ export function ProjectCard({
               size="sm"
               className="rounded-lg md:px-6 md:py-2 md:text-base"
             >
-              <a href={demoUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => posthog.capture("project_demo_clicked", { project_title: title })}
+              >
                 Demo
                 <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4 ml-1.5" />
               </a>
@@ -84,12 +95,22 @@ export function ProjectCard({
       {/* Mobile buttons (visible on small screens) */}
       <div className="flex gap-3 lg:hidden">
         <Button asChild variant="secondary" className="flex-1">
-          <a href={codeUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            href={codeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture("project_code_clicked", { project_title: title })}
+          >
             Code
           </a>
         </Button>
         <Button asChild className="flex-1">
-          <a href={demoUrl} target="_blank" rel="noopener noreferrer">
+          <a
+            href={demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => posthog.capture("project_demo_clicked", { project_title: title })}
+          >
             Demo
           </a>
         </Button>
