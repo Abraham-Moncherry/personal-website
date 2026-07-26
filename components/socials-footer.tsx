@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import posthog from "posthog-js";
 
 export function SocialsFoooter() {
   return (
@@ -24,6 +25,7 @@ export function SocialsFoooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => posthog.capture("social_link_clicked", { platform: "linkedin" })}
           >
             LinkedIn
           </a>
@@ -32,12 +34,14 @@ export function SocialsFoooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => posthog.capture("social_link_clicked", { platform: "github" })}
           >
             GitHub
           </a>
           <a
             href="mailto:abraham.m.moncherry@gmail.com"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => posthog.capture("social_link_clicked", { platform: "email" })}
           >
             Email
           </a>

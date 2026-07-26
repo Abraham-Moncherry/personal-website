@@ -1,5 +1,6 @@
 "use client";
 
+import posthog from "posthog-js";
 import { Conversation } from "@/components/conversation";
 import { ViewportReveal } from "@/components/viewport-reveal";
 import { ProjectCard } from "@/components/project-card";
@@ -268,6 +269,7 @@ export default function Home() {
           <a
             href="mailto:abraham@example.com"
             className="inline-block px-8 py-4 text-base font-bold font-headline bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity"
+            onClick={() => posthog.capture("cta_email_clicked")}
           >
             Get In Touch
           </a>
