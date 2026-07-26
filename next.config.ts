@@ -7,13 +7,26 @@ const nextConfig: NextConfig = {
       dynamic: 30, // 30 seconds
     },
   },
-  images: {
-    remotePatterns: [
+  // Proxies PostHog through our own domain so ad-blockers that block
+  // *.posthog.com don't silently drop analytics.
+  async rewrites() {
+    return [
       {
-        protocol: "https",
-        hostname: "*.supabase.co",
-        pathname: "/storage/v1/object/public/**",
+        source: "/ingest/static/:path*",
+        destination: "https://eu-assets.i.posthog.com/static/:path*",
       },
-    ],
+      {
+        source: "/ingest/array/:path*",
+        destination: "https://eu-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://eu.i.posthog.com/:path*",
+      },
+    ];
   },
+  // Required for the PostHog proxy - its API paths are trailing-slash sensitive.
+  skipTrailingSlashRedirect: true,
 };
+
+export default nextConfig;

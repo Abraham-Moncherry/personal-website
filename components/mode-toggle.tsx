@@ -5,6 +5,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
+import { track } from "@/lib/analytics";
 
 const SoundPlayer = dynamic(() => import("@/components/sound-player"), {
   ssr: false,
@@ -27,7 +28,9 @@ export function ModeToggle() {
   }
 
   function handleClick() {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    track("theme_toggled", { theme: nextTheme });
   }
 
   return (

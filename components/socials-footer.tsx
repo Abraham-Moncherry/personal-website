@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { ResumeDownloadLink } from "@/components/resume-link";
+import { track } from "@/lib/analytics";
 
 export function SocialsFoooter() {
   return (
@@ -24,6 +26,7 @@ export function SocialsFoooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => track("social_link_clicked", { platform: "linkedin" })}
           >
             LinkedIn
           </a>
@@ -32,15 +35,18 @@ export function SocialsFoooter() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => track("social_link_clicked", { platform: "github" })}
           >
             GitHub
           </a>
           <a
-            href="mailto:abraham.m.moncherry@gmail.com"
+            href="mailto:abraham.m.moncherry@gmail.com?subject=Not%20a%20stranger%20anymore"
             className="text-xs font-label uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => track("social_link_clicked", { platform: "email" })}
           >
             Email
           </a>
+          <ResumeDownloadLink />
         </div>
 
         {/* Right: Copyright */}

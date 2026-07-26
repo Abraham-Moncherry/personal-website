@@ -13,6 +13,7 @@ import { NavigationMenuDemo } from "@/components/navigation-bar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import { SocialsFoooter } from "@/components/socials-footer";
+import { SectionTimeTracker } from "@/components/analytics/section-time-tracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +65,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SectionTimeTracker />
           <div className="flex flex-col min-h-screen">
             {/* Frosted glass nav - centered nav, dark mode on right */}
             <header className="sticky top-0 z-50 overflow-hidden border-b border-border/40">

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
+import { track } from "@/lib/analytics";
 
 type FeedItem = {
   title: string;
@@ -69,6 +70,12 @@ export function MediumFeedWrapper() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary transition-colors"
+                onClick={() =>
+                  track("blog_article_clicked", {
+                    article_title: item.title,
+                    article_url: item.link,
+                  })
+                }
               >
                 {item.title}
               </a>
@@ -85,6 +92,12 @@ export function MediumFeedWrapper() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              onClick={() =>
+                track("blog_article_clicked", {
+                  article_title: item.title,
+                  article_url: item.link,
+                })
+              }
             >
               Read more
               <ExternalLink className="w-4 h-4" />

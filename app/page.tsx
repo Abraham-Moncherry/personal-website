@@ -7,6 +7,8 @@ import { StaggerContainer } from "@/components/stagger-container";
 import { MediumFeedWrapper } from "@/components/MediumFeedWrapper";
 import TechStackCarousel from "@/components/TechStackCarousel";
 import { HoverCardInfo } from "@/components/hoverCardInfo";
+import { track } from "@/lib/analytics";
+import { ResumeIconLink } from "@/components/resume-link";
 
 interface Project {
   title: string;
@@ -75,7 +77,7 @@ export default function Home() {
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section
         id="hero"
-        className="relative flex min-h-0 flex-col items-center justify-start overflow-hidden px-5 pb-10 pt-8 md:min-h-screen md:justify-center md:px-6 md:pb-12 md:pt-16"
+        className="relative flex min-h-0 flex-col items-center justify-start overflow-hidden px-5 pb-10 pt-4 md:min-h-screen md:justify-center md:px-6 md:pb-12 md:pt-16"
       >
         {/* Background orb glow */}
         <div className="absolute inset-0 flex items-center justify-center -z-10">
@@ -125,16 +127,13 @@ export default function Home() {
 
           {/* Sound wave (interactive, centered) */}
           <ViewportReveal delay={0.2}>
-            <div
-              className="flex justify-center"
-            >
+            <div className="flex justify-center">
               <div className="flex h-48 w-[min(76vw,300px)] items-center justify-center md:h-56">
                 <Conversation />
               </div>
             </div>
           </ViewportReveal>
         </div>
-
       </section>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -149,20 +148,17 @@ export default function Home() {
             <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-primary font-label">
               About
             </span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 font-headline">
-              About Me
-            </h2>
+            <div className="mt-2 flex items-baseline gap-2 md:gap-3">
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight font-headline">
+                About Me
+              </h2>
+              <ResumeIconLink />
+            </div>
           </div>
 
           {/* Bio */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-16">
             <div className="space-y-4 md:col-span-2 md:space-y-6">
-              <ViewportReveal delay={0.2}>
-                <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                  Computer Science graduate from the University of Melbourne.
-                </p>
-              </ViewportReveal>
-
               <ViewportReveal delay={0.3}>
                 <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
                   I love building things and creating impact. Passionate about
@@ -257,11 +253,12 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center px-5 py-20 text-center md:px-6 md:py-48">
         <div className="max-w-3xl">
           <h2 className="mb-6 text-4xl font-black tracking-tight font-headline md:mb-8 md:text-6xl">
-            Let's build the future together.
+            Don't be a stranger.
           </h2>
           <a
-            href="mailto:abraham@example.com"
+            href="mailto:abraham.m.moncherry@gmail.com?subject=Not%20a%20stranger%20anymore"
             className="inline-block px-8 py-4 text-base font-bold font-headline bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity"
+            onClick={() => track("cta_email_clicked")}
           >
             Get In Touch
           </a>
@@ -281,7 +278,7 @@ export default function Home() {
               Writing
             </span>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight mt-2 font-headline">
-              My Thoughts and Ideas
+              Notes from the build
             </h2>
           </div>
 

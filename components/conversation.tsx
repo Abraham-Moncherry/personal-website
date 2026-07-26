@@ -4,6 +4,7 @@ import { useConversation } from "@elevenlabs/react";
 import { useCallback, useEffect, useState } from "react";
 import { isInAppBrowser, supportsWebRTC } from "@/lib/browser-utils";
 import { SoundWave } from "@/components/ui/SoundWave";
+import { track } from "@/lib/analytics";
 
 type OrbState = "idle" | "listening" | "speaking";
 
@@ -85,6 +86,7 @@ export function Conversation() {
   const toggleConversation = useCallback(async () => {
     if (conversation.status === "connected") {
       await conversation.endSession();
+      track("ai_conversation_ended");
       setShowError(false);
       setOrbState("idle");
       return;
@@ -93,6 +95,7 @@ export function Conversation() {
     try {
       if (!supportsWebRTC()) {
         setShowError(true);
+        track("ai_conversation_error", { reason: "webrtc_not_supported" });
         return;
       }
 
@@ -102,9 +105,11 @@ export function Conversation() {
         agentId: "agent_4101k4a84me1fd7v14pn2j0aprx7",
         connectionType: "webrtc",
       });
+      track("ai_conversation_started");
       setShowError(false);
     } catch (error) {
       console.error("Failed to start conversation:", error);
+      track("ai_conversation_error", { reason: "start_failed" });
       setShowError(true);
       setOrbState("idle");
     }
