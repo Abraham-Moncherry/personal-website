@@ -21,6 +21,15 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Caissa",
+    image: "/caissa.png",
+    alt: "Caissa chess analysis board",
+    description:
+      "An open-source chess analysis and coaching web app. Import a PGN, replay the game on an interactive board, inspect Stockfish's key moments, and ask an AI coach what you should have played and how to improve.",
+    codeUrl: "https://github.com/Abraham-Moncherry/caissa",
+    demoUrl: "https://github.com/Abraham-Moncherry/caissa",
+  },
+  {
     title: "Gitty",
     image: "/gitty.png",
     alt: "Gitty Chrome extension",

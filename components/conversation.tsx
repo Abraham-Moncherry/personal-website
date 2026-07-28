@@ -1,7 +1,7 @@
 "use client";
 
 import { useConversation } from "@elevenlabs/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { isInAppBrowser, supportsWebRTC } from "@/lib/browser-utils";
 import { SoundWave } from "@/components/ui/SoundWave";
 import { track } from "@/lib/analytics";
@@ -14,11 +14,36 @@ export function Conversation() {
   const [showError, setShowError] = useState(false);
   const [orbState, setOrbState] = useState<OrbState>("idle");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
+  // Set when the session connects, read once when it ends. A ref rather than
+  // state so the callbacks below don't need to re-subscribe on every change.
+  const startedAt = useRef<number | null>(null);
+  const turns = useRef(0);
 
   const conversation = useConversation({
-    onConnect: () => setOrbState("listening"),
-    onDisconnect: () => setOrbState("idle"),
-    onMessage: () => setOrbState("speaking"),
+    onConnect: () => {
+      startedAt.current = performance.now();
+      turns.current = 0;
+      setOrbState("listening");
+      track("ai_conversation_started");
+    },
+    // Fires for every end path - the user tapping to stop, the agent hanging
+    // up, and the connection dropping - so duration is never lost.
+    onDisconnect: () => {
+      if (startedAt.current !== null) {
+        track("ai_conversation_ended", {
+          duration_seconds: Math.round(
+            (performance.now() - startedAt.current) / 1000,
+          ),
+          turns: turns.current,
+        });
+        startedAt.current = null;
+      }
+      setOrbState("idle");
+    },
+    onMessage: () => {
+      turns.current += 1;
+      setOrbState("speaking");
+    },
     onError: (error) => {
       console.error("Error:", error);
       setShowError(true);
@@ -86,7 +111,6 @@ export function Conversation() {
   const toggleConversation = useCallback(async () => {
     if (conversation.status === "connected") {
       await conversation.endSession();
-      track("ai_conversation_ended");
       setShowError(false);
       setOrbState("idle");
       return;
@@ -105,7 +129,6 @@ export function Conversation() {
         agentId: "agent_4101k4a84me1fd7v14pn2j0aprx7",
         connectionType: "webrtc",
       });
-      track("ai_conversation_started");
       setShowError(false);
     } catch (error) {
       console.error("Failed to start conversation:", error);

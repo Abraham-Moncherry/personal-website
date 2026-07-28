@@ -1,9 +1,14 @@
 "use client";
 
 import { FileText } from "lucide-react";
-import { track } from "@/lib/analytics";
 
-export const RESUME_PATH = "/resume.pdf";
+/**
+ * Points at the route handler in app/resume, not the PDF itself, so every
+ * access is counted server-side - including links opened outside the site.
+ * The query params are read there and become event properties; no click
+ * handler is needed, which also means the count survives blocked JS.
+ */
+export const RESUME_PATH = "/resume";
 
 /**
  * Small resume icon that sits beside the About Me heading. It nudges itself
@@ -14,10 +19,9 @@ export const RESUME_PATH = "/resume.pdf";
 export function ResumeIconLink() {
   return (
     <a
-      href={RESUME_PATH}
+      href={`${RESUME_PATH}?source=about`}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => track("resume_opened", { source: "about" })}
       // A bare icon says nothing to a screen reader, and the native tooltip
       // gives sighted users the same hint on hover.
       aria-label="Read my resume (PDF)"
@@ -34,14 +38,13 @@ export function ResumeIconLink() {
 }
 
 /**
- * Saves the resume to disk rather than opening it. Fires `resume_downloaded`.
+ * Saves the resume to disk rather than opening it.
  */
 export function ResumeDownloadLink() {
   return (
     <a
-      href={RESUME_PATH}
+      href={`${RESUME_PATH}?source=footer&action=download`}
       download="Abraham-Moncherry-Resume.pdf"
-      onClick={() => track("resume_downloaded", { source: "footer" })}
       className="text-xs font-label uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
     >
       Resume

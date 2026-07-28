@@ -25,6 +25,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // The resume used to be a static file at /resume.pdf. Anything already shared
+  // with that URL keeps working and now gets counted like every other access.
+  async redirects() {
+    return [
+      {
+        source: "/resume.pdf",
+        destination: "/resume?source=legacy-url",
+        permanent: false,
+      },
+    ];
+  },
   // Required for the PostHog proxy - its API paths are trailing-slash sensitive.
   skipTrailingSlashRedirect: true,
 };
